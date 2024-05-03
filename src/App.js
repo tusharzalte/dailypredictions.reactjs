@@ -1,19 +1,14 @@
 import React from 'react';
-import Chart from './Chart';
-import Navigation from './Navigation';
-import Header from './Header';
-import Cards from './Cards';
 import './App.css';
+import { Routes, Route } from "react-router";
+import Navigation from './screens/Navbar/Navbar';
+
 // Import other components
 
 function App() {
   return (
     <div className="App">
-      <Header />
       <Navigation />
-      <Chart />
-      <Cards />
-      {/* Cards section */}
     </div>
   );
 }
