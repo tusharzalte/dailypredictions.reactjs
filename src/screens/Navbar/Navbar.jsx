@@ -1,15 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Navigation = () => {
+  const navigate = useNavigate();
+
+  const navigateTo = (path) => {
+    navigate(path);
+  }
+
   return (
-    <div> 
-        <ul>
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Appliances</a></li>
-        <li><a href="#">About Us</a></li>
+    <div>
+      <ul>
+        <li><button onClick={() => navigateTo('/Dashboard')}>Dashboard</button></li>
+        <li><button onClick={() => navigateTo('/model-info')}>Model-info</button></li>
       </ul>
     </div>
-   
   );
 };
 
