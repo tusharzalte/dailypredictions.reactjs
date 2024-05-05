@@ -1,0 +1,159 @@
+.navbar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    text-align: center;
+    position: sticky;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+    top: 0;
+    left: 0;
+    padding: 0 10%;
+    background-color: #ffff;
+    z-index: 1;
+}
+
+
+.mainLink {
+    color: gray;
+    text-decoration: none;
+    font-size: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.nomenclature {
+    margin-left: -1.1rem;
+}   
+
+.searchContainer {
+    position: relative;
+    display: flex;
+    align-items: center;    
+    justify-content: center;
+}
+
+.searchIcon {    
+    color: var(--primary-theme-color);
+    position: absolute;
+    right: 8px;
+}
+
+.search {    
+    cursor: pointer;
+    border: none;
+    background-color: var(--light);
+    border-radius: 0.375rem;
+    outline: 2px solid transparent;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    margin: auto;
+}
+
+.navigators {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navlinks {
+    padding: 1.5rem;
+    font-size: 1.35rem;
+    color: var(--primary-theme-color);
+    text-decoration: none;
+    position: relative;
+}
+
+.navlinks.active {
+    color: var(--secondary);
+    font-weight: var(--fw-5);
+}
+  
+.nomenclature {
+    color: var(--primary);
+    font-weight: var(--fw-5);
+}
+
+.product {
+    color: var(--primary-theme-color);
+    font-weight: var(--fw-7);
+}
+
+.cartCount {
+    position: absolute;
+    font-size: var(--fs-xxxs-2);
+    padding: 0 5px;
+    right: 8px;
+    top: 10px;
+    min-width: 14px;
+    border: 2px solid #fff;
+    font-weight: var(--fw-7);
+    background-color: var(--danger);
+    color: white;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    border-radius: var(--br-full);
+}
+
+@media screen and (max-width: 1024px) {
+
+    .navbar {
+        padding: var(--space-xs);
+    }
+
+    .navlinks {
+        padding: var(--space-xxs);
+    }
+
+    .mainLink {
+        font-size: 1.8rem;
+    }
+
+    .nomenclature {
+        padding-left: 0.6rem;
+    }
+
+    .cartCount {
+        right: 0;
+        top: -2px;
+    }
+}
+
+@media screen and (max-width: 720px){
+
+    .navbar {
+        grid-template-columns: auto auto;
+        height: auto;
+    }
+
+    .searchContainer {
+        grid-row: 2;
+        grid-column: 1/span 2;
+    }
+
+    .nomenclature {
+        margin-left: -0.8rem;
+    }
+
+    .cartCount {
+        right: -5px;
+    }
+
+    .navlinks:first-child {
+        padding-left: 0;
+    }
+    
+    .navlinks:last-child {
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .mainLink {
+        font-size: 1rem;
+    }
+
+    .navlinks {
+        font-size: 1rem;
+    }
+}
