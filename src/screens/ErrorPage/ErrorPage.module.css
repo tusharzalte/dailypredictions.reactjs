@@ -1,0 +1,43 @@
+.mainBody {
+    padding: 0 10%;
+}
+
+.componentHeading {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.emptyPageMsg {
+    display: block;
+    color: var(--grey-5);
+    font-size: var(--fs-xs-1);
+    font-weight: var(--fw-5);
+    margin-bottom: var(--space-sm);
+    text-align: center;
+}
+
+.emptyPageMsgWrapper {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+.removePadding {
+    padding: 0;
+}
+
+
+/*
+************* MEDIA QUERIES *****************
+*/
+
+@media screen and (max-width: 680px) {
+    .mainBody {
+        padding: var(--space-xs);
+    }
+}
