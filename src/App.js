@@ -2,7 +2,8 @@ import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 // Import other components
-import { Dashboard, Navbar, Landing, Models } from "./screens";
+import { Dashboard, Navbar, Landing, Models, ErrorPage } from "./screens";
+import { Footer } from "./components";
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/models" element={<Models />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
