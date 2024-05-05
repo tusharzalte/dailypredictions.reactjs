@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <section className={styles.footerContent}>
         <article className={styles.footerLeft}>
-          <a href="/" target="_blank" className={styles.contribute}>
+          <a href="https://github.com/tusharzalte/dailypredictions.reactjs" target="_blank" className={styles.contribute}>
             Contribute to LoadCast
           </a>
           <div className={styles.footerLeftSociallinks}>
