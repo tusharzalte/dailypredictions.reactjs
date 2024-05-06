@@ -33,8 +33,6 @@ const Footer = () => {
           <Link to="/dashboard" className={styles.footerLink}>
             Dashboard
           </Link>
-        </article>
-        <article className={styles.footerRight}>
           <Link to="/models" className={styles.footerLink}>
             Models
           </Link>
