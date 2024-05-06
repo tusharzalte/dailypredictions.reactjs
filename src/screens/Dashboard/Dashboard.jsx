@@ -1,3 +1,5 @@
+
+import { DashboardForm } from "../../components";
 import { BreadCrumb } from "../../components";
 
 const Dashboard = () => {
@@ -9,7 +11,7 @@ const Dashboard = () => {
           { name: "Dashboard", path: "/dashboard" },
         ]}
       />
-      <h1>This is dashboard</h1>
+      <DashboardForm />
     </>
   );
 };
