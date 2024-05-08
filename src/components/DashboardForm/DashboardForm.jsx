@@ -93,8 +93,8 @@ const DashboardForm = () => {
   };  
 
   return (
-    <div>
-      <div>
+    <div style={styles.container}>
+      <div style={styles.header}>
         <label htmlFor="selectionDropdown">Choose Forecasting Method:</label>
         <select
           id="selectionDropdown"
@@ -106,8 +106,8 @@ const DashboardForm = () => {
           <option value="medium term">Medium Term</option>
         </select>
       </div>
-      <input type="file" accept=".csv" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Process Data</button>
+      <input type="file" accept=".csv" onChange={handleFileChange} style={styles.input}  />
+      <button onClick={handleUpload} style={styles.button}>Process Data</button>
       {chartData.labels && <Line data={chartData} options={{
           scales: {
             x: {
@@ -128,4 +128,69 @@ const DashboardForm = () => {
   );
 };
 
+const styles = {
+  container: {
+    maxWidth: '800px',
+    margin: '0 auto',
+    padding: '20px',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    borderRadius: '8px',
+    backgroundColor: '#fff',
+  },
+  header: {
+    marginBottom: '20px',
+  },
+  dropdown: {
+    marginLeft: '10px',
+    padding: '8px 16px',
+    borderRadius: '4px',
+    borderColor: '#ccc',
+  },
+  input: {
+    display: 'block',
+    width: '100%',
+    margin: '20px 0',
+    padding: '8px',
+  },
+  button: {
+    padding: '10px 20px',
+    backgroundColor: '#007BFF',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontSize: '16px',
+  },
+  chartOptions: {
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'DateTime'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Natural Demand (MW)'
+        }
+      }
+    },
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        mode: 'index',
+        intersect: false,
+      },
+    },
+    interaction: {
+      mode: 'nearest',
+      axis: 'x',
+      intersect: false
+    }
+  }
+};
 export { DashboardForm };
