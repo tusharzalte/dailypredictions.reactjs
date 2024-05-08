@@ -26,26 +26,28 @@ ChartJS.register(
 const DashboardForm = () => {
   const [csvData, setcsvData] = useState(null);
   const [chartData, setChartData] = useState({});
-  const [selectedOption, setSelectedOption] = useState("select");
+  const [selectedOption, setSelectedOption] = useState("get_short_term");
 
   const handleFileChange = (event) => {
     setcsvData(event.target.files[0]); 
     const file = event.target.files[0];
-    if (file) {
-      Papa.parse(file, {
-          header: true,
-          dynamicTyping: true,
-          complete: function(results) {
-              console.log("Parsing results:", results);
-              processChartData(results.data);
-          }
-      });
-    }
+    // if (file) {
+    //   Papa.parse(file, {
+    //       header: true,
+    //       dynamicTyping: true,
+    //       complete: function(results) {
+    //           console.log("Parsing results:", results);
+    //           processChartData(results.data);
+    //       }
+    //   });
+    // }
   };
 
   const processChartData = (data) => {
-    const labels = data.map(item => item.datetime);
-    const values = data.map(item => parseFloat(item.nat_demand));
+    // const labels = data.map(item => item.datetime);
+    const labels=data.datetime
+    // const values = data.map(item => parseFloat(item.nat_demand));
+    const values=data.nat_demand
     setChartData({
         labels: labels,
         datasets: [
@@ -75,8 +77,9 @@ const DashboardForm = () => {
     formData.append("file", csvData); // Append the file. 'file' is the key expected by the server
 
     try {
+
       const response = await axios.post(
-        "http://127.0.0.1:5000/get_short_term",
+        `http://127.0.0.1:5000/${selectedOption}`,
         formData,
         {
           headers: {
@@ -85,6 +88,27 @@ const DashboardForm = () => {
         }
       );
       console.log("Server Response:", response.data);
+      console.log(response.data.dates)
+      console.log(response.data.predicted_demand)
+      // const demand = response.data.predicted_demand.flat()
+      const times = response.data.dates.map((dateStr) => {
+        // Split the string to isolate the time component
+        const parts = dateStr.split(" "); // Split by space
+        return parts[4]; // The time component is the fifth element
+      });
+      const dates = response.data.dates.map((dateStr) => {
+        // Split the string to isolate the time component
+        const parts = dateStr.split(" "); // Split by space
+        return `${parts[1]} ${parts[2]} ${parts[3]}`; // The time component is the fifth element
+      });
+      
+
+      // console.log(demand)
+      if (response.data) {
+      
+      processChartData({datetime:selectedOption=="get_short_term"?times:dates,nat_demand:response.data.predicted_demand})
+    }
+
       alert("Upload successful!");
     } catch (error) {
       console.error("Upload error:", error);
@@ -101,14 +125,18 @@ const DashboardForm = () => {
           value={selectedOption}
           onChange={handleOptionChange}
         >
-          <option value="select">Select...</option>
-          <option value="short term">Short Term</option>
-          <option value="medium term">Medium Term</option>
+          
+          <option value="get_short_term">Short Term</option>
+          <option value="get_medium_term">Medium Term</option>
         </select>
       </div>
       <input type="file" accept=".csv" onChange={handleFileChange} />
       <button onClick={handleUpload}>Process Data</button>
-      {chartData.labels && <Line data={chartData} options={{
+      <div
+     
+      >
+      {chartData.labels && <Line data={chartData}  options={{
+        
           scales: {
             x: {
               title: {
@@ -119,11 +147,12 @@ const DashboardForm = () => {
             y: {
               title: {
                 display: true,
-                text: 'Natural Demand (MW)'
+                text: ' Demand (MW)'
               }
             }
           }
         }} />}
+        </div>
     </div>
   );
 };
