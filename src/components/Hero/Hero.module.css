@@ -1,0 +1,59 @@
+.hero {
+  min-height: calc(100vh - 16rem);
+  display: flex;
+  align-items: center;
+  gap: 0 1rem;
+  color: var(--primary-800);
+  padding: 0 10%;
+}
+
+.content h1 {
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.content p {
+  font-size: 1rem;
+  color: var(--grey-6);
+  letter-spacing: var(--letterSpacing);
+  margin: 1rem 0 1.5rem;
+}
+
+.btnHero {
+  font-size: 1.25rem;
+  padding: 0.5rem 1.25rem;
+  text-transform: capitalize;
+}
+
+@media screen and (min-width: 768px) {
+  .content h1 {
+    font-size: 2.25rem;
+  }
+
+  .content p {
+    font-size: 1.125rem;
+  }
+
+  .imageContainer {
+    display: block;
+    width: 100%;
+    margin-left: -1rem;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .content h1 {
+    font-size: 3rem;
+  }
+
+  .content p {
+    font-size: 1.25rem;
+  }
+  .imageContainer {
+    margin-left: 0;
+  }
+}
