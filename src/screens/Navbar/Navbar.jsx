@@ -1,10 +1,8 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
-
-  const navigate = useNavigate();
 
   const getNavStyle = ({ isActive }) => {
     const outputClass = styles.navlinks;

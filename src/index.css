@@ -254,7 +254,7 @@
 
 /* scroll bar styling */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -265,4 +265,6 @@
 
 ::-webkit-scrollbar-thumb {
   background: var(--primary);
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
 }

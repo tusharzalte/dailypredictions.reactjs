@@ -1,0 +1,29 @@
+.custom_tooltip {
+    display: flex;
+    flex-direction: row;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--grey-1);
+    column-gap: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--bs-xxs);
+    background-color: #fff;
+}
+
+.flow {
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+}
+
+.label {
+    font-size: var(--fs-xxxs-2);
+}
+
+.value {
+    font-weight: var(--fw-7);
+    color: var(--grey-5);
+}
+
+.bold {
+    color: var(--primary-theme-color);
+}
