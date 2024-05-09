@@ -131,10 +131,8 @@ const DashboardForm = () => {
         </select>
       </div>
       <input type="file" accept=".csv" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Process Data</button>
-      <div
-     
-      >
+      <button onClick={handleUpload} style={styles.buttonStyle}>Process Data</button>
+      <div style={styles.graph}>
       {chartData.labels && <Line data={chartData}  options={{
         
           scales: {
@@ -156,7 +154,6 @@ const DashboardForm = () => {
     </div>
   );
 };
-
 const styles = {
   container: {
     maxWidth: '800px',
@@ -165,6 +162,18 @@ const styles = {
     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     borderRadius: '8px',
     backgroundColor: '#fff',
+  },
+  graph: {
+    paddingTop:"20px"
+  },
+  buttonStyle: {
+    padding: '5px 10px', // Medium size padding
+    fontSize: '12px', // Readable font size
+    backgroundColor: '#007bff', // Bootstrap primary color
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer'
   },
   header: {
     marginBottom: '20px',
