@@ -31,7 +31,7 @@ const HeroChart = () => {
       margin={{ top: 10, right: 30, left: 20, bottom: 0 }}
     >
       <Tooltip content={<CustomTooltip />} />
-      <Line type="monotone" dataKey="pv" stroke="#e11d48" />
+      <Line type="monotone" dataKey="pv" stroke="#e11d48" activeDot={{ r: 8, fill: '#001219' }} />
       <Line type="monotone" dataKey="uv" stroke="#fda4af" />
     </LineChart>
   );

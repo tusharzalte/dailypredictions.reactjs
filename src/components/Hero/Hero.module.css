@@ -1,10 +1,14 @@
 .hero {
-  min-height: calc(100vh - 16rem);
+  min-height: calc(100vh - 12rem);
   display: flex;
   align-items: center;
-  gap: 0 1rem;
+  column-gap: 3rem;
   color: var(--primary-800);
   padding: 0 10%;
+}
+
+.content {
+  max-width: 50%;
 }
 
 .content h1 {
@@ -16,7 +20,7 @@
 .content p {
   font-size: 1rem;
   color: var(--grey-6);
-  letter-spacing: var(--letterSpacing);
+  letter-spacing: 1.5px;
   margin: 1rem 0 1.5rem;
 }
 
