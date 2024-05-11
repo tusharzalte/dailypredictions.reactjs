@@ -27,7 +27,7 @@ const Landing = () => {
               </div>
               <div className="content-section">
                 <p className="text-xl font-semibold">{d.name}</p>
-                <p className="text-center">{d.review}</p>
+                <p className="text-center text">{d.review}</p>
                 <button className="read-more-btn">Read More</button>
               </div>
             </div>
@@ -41,17 +41,18 @@ const Landing = () => {
 const data = [
   {
     name: `Dashboard`,
-    img: `/students/John_Morgan.jpg`,
-    review: `Lorem ipsum dolor sit Samet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+    img: `/assets/dashboard.png`,
+    review: `Here you can do load forecasting based on your choice.`,
   },
   {
-    name: `Short-term`,
-    img: `/students/Ellie_Anderson.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+    name: `Short-Term`,
+    img: `/assets/short.png`,
+    review: `The time-period of STLF lasts for a few minutes or hours to one-day ahead or a week. STLF aims at economic dispatch and optimal generator unit commitment while addressing real-time control and security assessment.
+    `,
   },
   {
-    name: `Medium-term`,
-    img: `/students/Nia_Adebayo.jpg`,
+    name: `Medium-Term`,
+    img: `/assets/medium.png`,
     review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
   },
 ];

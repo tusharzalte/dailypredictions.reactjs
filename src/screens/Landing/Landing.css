@@ -1,17 +1,18 @@
 /* Carousel container */
 .carousel-container {
   width: 50%; /* Start with 50% width for larger screens */
-  margin: 1rem auto;
-  padding: 0 2rem;
+  margin: 2rem auto;
+  padding: 0 2rem 1rem;
 }
 
 /* Each slide's main container */
 .slide-container {
+  border: 1px solid var(--grey-1);
   background: white;
-  height: 450px;
+  min-height: 450px;
   text-align: center;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--bs-xxs);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19,7 +20,6 @@
 
 /* The image container at the top of each card */
 .image-container {
-  background: #6776b6;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,11 +30,11 @@
 
 /* Styling for the images inside the slider */
 .slide-image {
-  height: 176px;
-  width: 176px;
-  border-radius: 50%;
-  border: 4px solid white;
+  height: 250px;
+  width: 300px;
   object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 /* Content section */
@@ -46,20 +46,25 @@
   align-items: center;
 }
 
+.content-section .text {
+  color: var(--grey-6);
+  letter-spacing: 0.75px;
+}
+
 /* Button styling */
 .read-more-btn {
-  background-color: #667eea;
+  background-color: var(--primary);
   color: white;
-  padding: 0.5rem 1.5rem;
-  border-radius: 20px;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.75rem;
   border: none;
   cursor: pointer;
   font-size: 1rem;
-  transition: background 0.3s;
+  transition: background 0.3s ease-in;  
 }
 
 .read-more-btn:hover {
-  background-color: #5a67d8;
+  background-color: var(--hover);
 }
 
 /* Media Queries for Responsive Adjustments */
