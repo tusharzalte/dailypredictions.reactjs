@@ -13,6 +13,7 @@ import {
 } from "chart.js";
 import styles from "./DashboardForm.module.css";
 import { toastNotification } from "../../constants/toaster";
+import { Loader } from "../index";
 
 ChartJS.register(
   CategoryScale,
@@ -28,9 +29,11 @@ const DashboardForm = () => {
   const [csvData, setcsvData] = useState(null);
   const [chartData, setChartData] = useState({});
   const [selectedOption, setSelectedOption] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event) => {
-    if(!event.target.files[0]) setChartData({});
+    const { name: fileName } = event.target.files[0];
+    if (!event.target.files[0] || fileName !== csvData?.name ) setChartData({});
     setcsvData(event.target.files[0]);
   };
 
@@ -55,7 +58,8 @@ const DashboardForm = () => {
   };
 
   const handleOptionChange = (event) => {
-    if(!event.target.value || event.target.value !== selectedOption) setChartData({});
+    if (!event.target.value || event.target.value !== selectedOption)
+      setChartData({});
     setSelectedOption(event.target.value);
   };
 
@@ -64,12 +68,12 @@ const DashboardForm = () => {
   };
 
   const handleUpload = async () => {
+    if (chartData?.labels?.length > 0) setChartData({});
 
-    if(chartData?.labels?.length > 0) setChartData({});
-    
     const formData = new FormData();
     formData.append("file", csvData); // Append the file. 'file' is the key expected by the server
 
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `http://127.0.0.1:5000/${selectedOption}`,
@@ -102,10 +106,11 @@ const DashboardForm = () => {
           net_demand: response.data.predicted_demand,
         });
       }
-
+      setIsLoading(false);
       toastNotification("SUCCESS", "File Uploaded Successfully");
     } catch (error) {
       console.error("Upload error:", error);
+      setIsLoading(false);
       toastNotification("ERROR", "File Upload Failed");
     }
   };
@@ -130,11 +135,14 @@ const DashboardForm = () => {
         <button
           disabled={!checkMissingData()}
           onClick={handleUpload}
-          className={`${styles.btnUpload} ${!checkMissingData() && styles.disabledBtn} button btn-solid-primary`}
+          className={`${styles.btnUpload} ${
+            !checkMissingData() && styles.disabledBtn
+          } button btn-solid-primary`}
         >
           Process Data
         </button>
       </div>
+      <div className={styles.loader}>{isLoading && <Loader />}</div>
 
       <div className={styles.graph}>
         {chartData.labels && (
