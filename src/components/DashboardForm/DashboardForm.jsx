@@ -55,7 +55,7 @@ const DashboardForm = () => {
   };
 
   const handleOptionChange = (event) => {
-    if(!event.target.value) setChartData({});
+    if(!event.target.value || event.target.value !== selectedOption) setChartData({});
     setSelectedOption(event.target.value);
   };
 
@@ -98,7 +98,7 @@ const DashboardForm = () => {
       // console.log(demand)
       if (response.data) {
         processChartData({
-          datetime: selectedOption == "get_short_term" ? times : dates,
+          datetime: selectedOption === "get_short_term" ? times : dates,
           net_demand: response.data.predicted_demand,
         });
       }
