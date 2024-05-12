@@ -30,7 +30,6 @@
   --primary-theme-color: #001219;
   --secondary-theme-color: #fff;
   --secondary-theme-background: #fff;
-  --toastify-color-info: var(--primary) !important;
   --toastify-color-success: var(--success) !important;
   --toastify-color-warning: var(--warning) !important;
   --toastify-color-error: var(--danger) !important;

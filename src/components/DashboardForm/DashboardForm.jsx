@@ -12,6 +12,7 @@ import {
   Legend,
 } from "chart.js";
 import styles from "./DashboardForm.module.css";
+import { toastNotification } from "../../constants/toaster";
 
 ChartJS.register(
   CategoryScale,
@@ -29,15 +30,15 @@ const DashboardForm = () => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleFileChange = (event) => {
+    if(!event.target.files[0]) setChartData({});
     setcsvData(event.target.files[0]);
-    const file = event.target.files[0];
   };
 
   const processChartData = (data) => {
     // const labels = data.map(item => item.datetime);
     const labels = data.datetime;
     // const values = data.map(item => parseFloat(item.nat_demand));
-    const values = data.nat_demand;
+    const values = data.net_demand;
     setChartData({
       labels: labels,
       datasets: [
@@ -54,15 +55,18 @@ const DashboardForm = () => {
   };
 
   const handleOptionChange = (event) => {
+    if(!event.target.value) setChartData({});
     setSelectedOption(event.target.value);
   };
 
-  const handleUpload = async () => {
-    if (!csvData) {
-      alert("Please select a file first!");
-      return;
-    }
+  const checkMissingData = () => {
+    return selectedOption && csvData;
+  };
 
+  const handleUpload = async () => {
+
+    if(chartData?.labels?.length > 0) setChartData({});
+    
     const formData = new FormData();
     formData.append("file", csvData); // Append the file. 'file' is the key expected by the server
 
@@ -95,14 +99,14 @@ const DashboardForm = () => {
       if (response.data) {
         processChartData({
           datetime: selectedOption == "get_short_term" ? times : dates,
-          nat_demand: response.data.predicted_demand,
+          net_demand: response.data.predicted_demand,
         });
       }
 
-      alert("Upload successful!");
+      toastNotification("SUCCESS", "File Uploaded Successfully");
     } catch (error) {
       console.error("Upload error:", error);
-      alert("Upload failed!");
+      toastNotification("ERROR", "File Upload Failed");
     }
   };
 
@@ -124,8 +128,9 @@ const DashboardForm = () => {
           <input type="file" accept=".csv" onChange={handleFileChange} />
         </div>
         <button
+          disabled={!checkMissingData()}
           onClick={handleUpload}
-          className={`${styles.btnUpload} button btn-solid-primary`}
+          className={`${styles.btnUpload} ${!checkMissingData() && styles.disabledBtn} button btn-solid-primary`}
         >
           Process Data
         </button>
