@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
-import Papa from "papaparse";
-import { useNavigate } from "react-router-dom";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import styles from "./DashboardForm.module.css";
 
 ChartJS.register(
   CategoryScale,
@@ -108,25 +107,31 @@ const DashboardForm = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
+    <div className={styles.container}>
+      <div className={styles.header}>
         <label htmlFor="selectionDropdown">Choose Forecasting Method:</label>
         <select
           id="selectionDropdown"
           value={selectedOption}
           onChange={handleOptionChange}
-          required
         >
-          <option value="">Select...</option>
+          <option value="">Method...</option>
           <option value="get_short_term">Short Term</option>
           <option value="get_medium_term">Medium Term</option>
         </select>
+        <div className={`${styles.uploadOption} grid gap-2`}>
+          <label htmlFor="csvFile">Upload a CSV File: </label>
+          <input type="file" accept=".csv" onChange={handleFileChange} />
+        </div>
+        <button
+          onClick={handleUpload}
+          className={`${styles.btnUpload} button btn-solid-primary`}
+        >
+          Process Data
+        </button>
       </div>
-      <input type="file" accept=".csv" onChange={handleFileChange} />
-      <button onClick={handleUpload} style={styles.buttonStyle}>
-        Process Data
-      </button>
-      <div style={styles.graph}>
+
+      <div className={styles.graph}>
         {chartData.labels && (
           <Line
             data={chartData}
@@ -152,82 +157,5 @@ const DashboardForm = () => {
     </div>
   );
 };
-const styles = {
-  container: {
-    minHeight: "calc(50vh)",
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: "20px",
-    boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-    borderRadius: "8px",
-    backgroundColor: "#fff",
-  },
-  graph: {
-    paddingTop: "20px",
-  },
-  buttonStyle: {
-    padding: "5px 10px", // Medium size padding
-    fontSize: "12px", // Readable font size
-    backgroundColor: "#007bff", // Bootstrap primary color
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  header: {
-    marginBottom: "20px",
-  },
-  dropdown: {
-    marginLeft: "10px",
-    padding: "8px 16px",
-    borderRadius: "4px",
-    borderColor: "#ccc",
-  },
-  input: {
-    display: "block",
-    width: "100%",
-    margin: "20px 0",
-    padding: "8px",
-  },
-  button: {
-    padding: "10px 20px",
-    backgroundColor: "#007BFF",
-    color: "#fff",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-    fontSize: "16px",
-  },
-  chartOptions: {
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: "DateTime",
-        },
-      },
-      y: {
-        title: {
-          display: true,
-          text: "Natural Demand (MW)",
-        },
-      },
-    },
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      tooltip: {
-        mode: "index",
-        intersect: false,
-      },
-    },
-    interaction: {
-      mode: "nearest",
-      axis: "x",
-      intersect: false,
-    },
-  },
-};
+
 export { DashboardForm };

@@ -53,7 +53,7 @@ const data = [
   {
     name: `Medium-Term`,
     img: `/assets/medium.png`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+    review: `The time-period of MTLF is a week to one month (possibly two months). MTLF aims at maintenance scheduling, coordination of load dispatch and price settlement so that demand and generation is balanced.`,
   },
 ];
 
