@@ -12,6 +12,8 @@ import {
   Legend,
 } from "chart.js";
 import styles from "./DashboardForm.module.css";
+import { toastNotification } from "../../constants/toaster";
+import { Loader } from "../index";
 
 ChartJS.register(
   CategoryScale,
@@ -27,17 +29,19 @@ const DashboardForm = () => {
   const [csvData, setcsvData] = useState(null);
   const [chartData, setChartData] = useState({});
   const [selectedOption, setSelectedOption] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event) => {
+    const { name: fileName } = event.target.files[0];
+    if (!event.target.files[0] || fileName !== csvData?.name ) setChartData({});
     setcsvData(event.target.files[0]);
-    const file = event.target.files[0];
   };
 
   const processChartData = (data) => {
     // const labels = data.map(item => item.datetime);
     const labels = data.datetime;
     // const values = data.map(item => parseFloat(item.nat_demand));
-    const values = data.nat_demand;
+    const values = data.net_demand;
     setChartData({
       labels: labels,
       datasets: [
@@ -54,18 +58,22 @@ const DashboardForm = () => {
   };
 
   const handleOptionChange = (event) => {
+    if (!event.target.value || event.target.value !== selectedOption)
+      setChartData({});
     setSelectedOption(event.target.value);
   };
 
+  const checkMissingData = () => {
+    return selectedOption && csvData;
+  };
+
   const handleUpload = async () => {
-    if (!csvData) {
-      alert("Please select a file first!");
-      return;
-    }
+    if (chartData?.labels?.length > 0) setChartData({});
 
     const formData = new FormData();
     formData.append("file", csvData); // Append the file. 'file' is the key expected by the server
 
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `http://127.0.0.1:5000/${selectedOption}`,
@@ -94,15 +102,16 @@ const DashboardForm = () => {
       // console.log(demand)
       if (response.data) {
         processChartData({
-          datetime: selectedOption == "get_short_term" ? times : dates,
-          nat_demand: response.data.predicted_demand,
+          datetime: selectedOption === "get_short_term" ? times : dates,
+          net_demand: response.data.predicted_demand,
         });
       }
-
-      alert("Upload successful!");
+      setIsLoading(false);
+      toastNotification("SUCCESS", "File Uploaded Successfully");
     } catch (error) {
       console.error("Upload error:", error);
-      alert("Upload failed!");
+      setIsLoading(false);
+      toastNotification("ERROR", "File Upload Failed");
     }
   };
 
@@ -124,12 +133,16 @@ const DashboardForm = () => {
           <input type="file" accept=".csv" onChange={handleFileChange} />
         </div>
         <button
+          disabled={!checkMissingData()}
           onClick={handleUpload}
-          className={`${styles.btnUpload} button btn-solid-primary`}
+          className={`${styles.btnUpload} ${
+            !checkMissingData() && styles.disabledBtn
+          } button btn-solid-primary`}
         >
           Process Data
         </button>
       </div>
+      <div className={styles.loader}>{isLoading && <Loader />}</div>
 
       <div className={styles.graph}>
         {chartData.labels && (

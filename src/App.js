@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 // Import other components
 import { Dashboard, Navbar, Landing, Models, ErrorPage } from "./screens";
 import { Footer } from "./components";
@@ -8,6 +9,12 @@ import { Footer } from "./components";
 function App() {
   return (
     <div className="App">
+      <ToastContainer
+        style={{
+          fontSize: "1rem",
+          fontWeight: "500",
+        }}
+      />
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />

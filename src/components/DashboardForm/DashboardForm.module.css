@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   min-height: 50vh;
   max-width: 800px;
   margin: 0 auto;
@@ -44,14 +44,29 @@ input {
 }
 
 input::file-selector-button {
-    background-color: var(--secondary);
-    color: white;
-    border-radius: var(--br-xxs);
-    border: 0;
-    padding: 0.5rem 1.2rem;
+  background-color: var(--secondary);
+  color: white;
+  border-radius: var(--br-xxs);
+  border: 0;
+  padding: 0.4rem 1.2rem;
 }
 
 .btnUpload {
   font-size: var(--fs-xxs-1);
   border-radius: 0.5rem;
+}
+
+.disabledBtn {
+  background-color: var(--grey-4);
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.disabledBtn:hover {
+  background-color: var(--grey-4);
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
 }
