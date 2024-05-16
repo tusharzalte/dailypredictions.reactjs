@@ -1,4 +1,5 @@
 import { BreadCrumb } from "../../components";
+import StickyScrollRevealDemo from "../../services/StickyComponent";
 import styles from "./Models.module.css";
 
 const Models = () => {
@@ -11,7 +12,7 @@ const Models = () => {
         ]}
       />
       <div className={styles.main}>
-        <h1>here we provide model info</h1>
+        <StickyScrollRevealDemo />
       </div>
     </>
   );

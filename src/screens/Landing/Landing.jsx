@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,12 +8,20 @@ import "./Landing.css"; // Make sure the path matches your CSS file's actual loc
 import { Hero } from "../../components";
 
 const Landing = () => {
+  const  navigate  = useNavigate();
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+  };
+
+  const navigateUser = (destination) => {
+    navigate(
+      `${destination.toLowerCase() === "dashboard" ? "/dashboard" : "/models"}`
+    );
   };
 
   return (
@@ -28,7 +37,12 @@ const Landing = () => {
               <div className="content-section">
                 <p className="text-xl font-semibold">{d.name}</p>
                 <p className="text-center text">{d.review}</p>
-                <button className="read-more-btn">Read More</button>
+                <button
+                  onClick={() => navigateUser(d.name)}
+                  className="read-more-btn"
+                >
+                  Read More
+                </button>
               </div>
             </div>
           ))}

@@ -4,11 +4,12 @@ import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 // Import other components
 import { Dashboard, Navbar, Landing, Models, ErrorPage } from "./screens";
-import { Footer } from "./components";
+import { Footer, ScrollToTop } from "./components";
 
 function App() {
   return (
     <div className="App">
+      <ScrollToTop />
       <ToastContainer
         style={{
           fontSize: "1rem",
