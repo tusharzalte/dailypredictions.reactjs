@@ -2,8 +2,8 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const toastStyle = {
-  position: "top-right",
-  autoClose: 1000,
+  position: "bottom-right",
+  autoClose: 1500,
   hideProgressBar: false,
   closeOnClick: true,
   draggable: true,
