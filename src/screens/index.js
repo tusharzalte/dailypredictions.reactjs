@@ -3,3 +3,4 @@ export { Navbar } from "./Navbar/Navbar";
 export { Landing } from "./Landing/Landing";
 export { Models } from "./Models/Models";
 export { ErrorPage } from "./ErrorPage/ErrorPage";
+export { AboutUs } from "./AboutUs/AboutsUs";

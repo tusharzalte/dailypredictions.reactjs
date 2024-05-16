@@ -28,7 +28,7 @@ ChartJS.register(
 const DashboardForm = () => {
   const [csvData, setcsvData] = useState(null);
   const [chartData, setChartData] = useState({});
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event) => {
