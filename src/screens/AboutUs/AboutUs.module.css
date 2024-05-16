@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 1rem;
+  min-height: 50vh;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: var(--bs-sm);
+  border-radius: var(--br-xs);
+  background-color: #fff;
+}
+
+.caption {
+    color: var(--primary);
+}
